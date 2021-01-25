@@ -257,60 +257,7 @@ var task = function(win, info, settings, no, callback) {
                                     request.get(opts, (error, resp, body) => {  
 
                                             if (error) {
-                                                console.log(err);
-                                                sender.send('updateMonitor', {
-                                                    no: no,
-                                                    msg: `Proxy Invalid, destroying droplet.`,
-                                                    username: info.username,
-                                                    password: info.password,
-                                                    ip: host,
-                                                    port: info.port,
-                                                    error: true
-                                                });
-                                                notifier.notify({
-                                                    message: "Proxy Invalid, destroying droplet.",
-                                                    title: err,
-                                                    sound: true,//"Bottle",
-                                                    icon : `${__dirname}/logo.png`,
-                                                    wait:false
-                                                })
 
-                                                destroyDroplet(id, api, function(err, resp) {
-                                                    if (err) {
-                                                        sender.send('updateMonitor', {
-                                                            no: no,
-                                                            msg: `Error Occured while destroying droplet due to bad proxy Connection.`,
-                                                            username: info.username,
-                                                            password: info.password,
-                                                            ip: host,
-                                                            port: info.port,
-                                                            error: true
-                                                        });
-                                                        return callback(null, true);
-                                                    }
-
-                                                    sender.send('updateMonitor', {
-                                                        no: no,
-                                                        msg: `Droplet Destroyed due to bad proxy connection.`,
-                                                        username: info.username,
-                                                        password: info.password,
-                                                        ip: host,
-                                                        port: info.port,
-                                                        error: true
-                                                    });
-                                                    notifier.notify({
-                                                        message: "Droplet Destroyed due to bad proxy connection, during final test.",
-                                                        title: `[${no}] Droplet Destoryed`,
-                                                        sound: true,//"Bottle",
-                                                        icon :`${__dirname}/logo.png`,
-                                                        wait:false
-                                                    })
-
-                                                    return callback(null, true);
-
-                                                });
-
-                                            } else {
                                                 sender.send('updateMonitor', {
                                                     no: no,
                                                     msg: `Created!`,
@@ -330,6 +277,7 @@ var task = function(win, info, settings, no, callback) {
 
                                                 return callback(null, true);
                                             }
+                                                
 
                                         });
                         
